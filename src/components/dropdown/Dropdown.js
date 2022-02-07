@@ -37,7 +37,7 @@ export const Dropdown = ({title, options, onSelect}) => {
             
         )}
 
-        </div>
+    </div>
     );
     
 }

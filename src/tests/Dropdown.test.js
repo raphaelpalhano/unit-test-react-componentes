@@ -1,5 +1,5 @@
 import { Dropdown } from '../components/dropdown/Dropdown'
-import {render, fireEvent, waitFor, screen, userEvent} from './libs/base-libs'
+import {render, screen, userEvent, fireEvent} from './libs/base-libs'
 
 /**
  * @Funcionalidades
@@ -13,14 +13,24 @@ describe('Dropdown de listas de camas', () => {
     const title = 'Camas';
     const options = ['Sofa cama', 'Cama com mola', 'Cama de solteiro', 'Cama de Casal']
 
-    test('Validando que o dropdown de lista de camas inicializa fechado',  () => {
+    beforeEach(() => {
         render(
-        <Dropdown title= {title}
-        options={options}
-        onSelect={() => {}}
-        />
-        );
+            <Dropdown title= {title}
+            options={options}
+            onSelect={() => {}}
+            />
+            );
+    })
 
-        expect(screen.queryByText('Sofa cama')).not.toBeInTheDocument(); 
+    test('Validando que o dropdown de lista de camas inicializa fechado',  () => {
+       
+        expect(screen.queryByText(options[0])).not.toBeInTheDocument(); 
     });
+
+    test('Mostrar as opções de cama ao clicar no dropdown', () => {
+        
+        userEvent.click( screen.getByText('Camas'));
+        expect(screen.getByText(options[0])).toBeInTheDocument(); 
+
+    })
 });
